@@ -1,10 +1,8 @@
- const db = require('../config/database');
+const service = require('../services/banks.service');
  
  exports.findAll = async (req, res) => {
-   const response = await db.query(
-     'SELECT * FROM banks ORDER BY code ASC',
-   );
-   res.status(200).send(response.rows);
+   const result = await service.findAll();
+   res.status(200).send(result);
  };
 
  

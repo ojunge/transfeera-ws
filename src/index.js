@@ -7,6 +7,7 @@ const app = express();
 const migrationRoute = require('./routes/migration.routes');
 const accountsTypeRoute = require('./routes/accountstype.routes');
 const banksRoute = require('./routes/banks.routes');
+const favoritesRoute = require('./routes/favorites.routes');
 
 
 app.use(express.urlencoded({ extended: true }));
@@ -17,6 +18,7 @@ app.use(cors());
 app.use('/migration/', migrationRoute);
 app.use('/accountsType/', accountsTypeRoute);
 app.use('/banks/', banksRoute);
+app.use('/favorites/', favoritesRoute);
 
 
 module.exports = app;
@@ -24,5 +26,3 @@ module.exports = app;
 app.listen(2164);
 
 
-//http://localhost:2164/accountsType
-//http://localhost:2164/banks
