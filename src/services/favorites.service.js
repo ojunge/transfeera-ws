@@ -1,10 +1,10 @@
 const db = require('../config/database');
 const util = require("../libraries/util");
  
- exports.findAll = async (search) => {
+ exports.findAll = async (search, size = 10, skip = 0) => {
    let result = [];
    if(util.isEmpty(search)||search === undefined){
-    result = await this.findByNoFilter();
+    result = await this.findByNoFilter(size, skip);
   }else if(util.isNif(search) || util.isAgency(search) || util.isAccount(search)){
       const field = util.isNif(search) ? 'nif' : util.isAgency(search) ? 'agency' : 'account';
     result = await this.findAllBySimpleField(field,search);
@@ -20,15 +20,16 @@ const util = require("../libraries/util");
   };
 
  exports.findByNoFilter = async (size, skip) => {
-  const count = await db.query('SELECT count(id) FROM favorites');
-  const result = await db.query('SELECT * FROM favorites');
-  return result.rows;
+  const count = await db.query('SELECT count(id) FROM vw_favorites');
+  console.log(count)
+  const result = await db.query('SELECT * FROM vw_favorites');
+  return util.paginate(count.rows[0].count,result.rows,skip,size);
 };
 
  exports.findAllBySimpleField = async (field, search) => {
 
   const result = await db.query(
-    'SELECT * FROM favorites WHERE '+field+' = $1',
+    'SELECT * FROM vw_favorites WHERE '+field+' = $1',
     [search],
   );
   return result.rows;
@@ -39,7 +40,7 @@ const util = require("../libraries/util");
 
   const likeParam = '%' + search + '%';
   const result = await db.query(
-    "SELECT * FROM favorites WHERE name like $1 OR nif like $1 OR agency like $1 OR account like $1",
+    "SELECT * FROM vw_favorites WHERE name like $1 OR nif like $1 OR agency like $1 OR account like $1",
     [likeParam],
   );
   return result.rows;

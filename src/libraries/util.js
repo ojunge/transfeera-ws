@@ -27,6 +27,11 @@ module.exports = {
     if(agency.length == 8)
       return true;
     return false;
+  },
+  paginate: (total, list, index, size)=> {
+    const pagination = { total: total, data: list, index:index, size: size}
+    return pagination;
   }    
+   
 
 };
