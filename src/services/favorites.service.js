@@ -40,7 +40,10 @@ const util = require("../libraries/util");
 
   const likeParam = '%' + search + '%';
   const result = await db.query(
-    "SELECT * FROM vw_favorites WHERE name like $1 OR nif like $1 OR agency like $1 OR account like $1",
+    " SELECT * FROM vw_favorites WHERE name like $1 union all "+
+    " SELECT * FROM vw_favorites WHERE nif like $1 union all "+
+    " SELECT * FROM vw_favorites WHERE agency like $1 union all "+
+    " SELECT * FROM vw_favorites WHERE account like $1",
     [likeParam],
   );
   return result.rows;
