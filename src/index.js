@@ -15,14 +15,16 @@ app.use(express.json());
 app.use(express.json({ type: 'application/vnd.api+json' }));
 app.use(cors());
 
+//Routes
 app.use('/migration/', migrationRoute);
 app.use('/accountsType/', accountsTypeRoute);
 app.use('/banks/', banksRoute);
 app.use('/favorites/', favoritesRoute);
 
-
 module.exports = app;
 
-app.listen(2164);
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(2164);
+}
 
 

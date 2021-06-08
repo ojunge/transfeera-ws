@@ -15,14 +15,14 @@
  const pool = new Pool(configDB);
  
  pool.on('connect', () => {
-   console.log('Base de Dados conectado com sucesso!');
+   //console.log('Base de Dados conectado com sucesso!');
  });
  
  module.exports = {
    query: (text, params) => {
-    console.log(text);
-    if(params != undefined) 
-    console.log(params); 
+    //  console.log(text);
+    //  if(params != undefined) 
+    //  console.log(params); 
   return pool.query(text, params)
    
    },

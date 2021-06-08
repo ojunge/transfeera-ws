@@ -3,6 +3,9 @@ const moment = require('moment');
 module.exports = {
 
   isEmpty: (value)=> {
+    if(value === undefined || value == null)
+      return true;
+      
     var regExpVerifyLetters = /[a-zA-Z]/g;
     var regExpVerifyNumbers =  /\d/;
 

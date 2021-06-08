@@ -4,7 +4,7 @@
   "description": "web service para projeto da Transfeera",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -31,5 +31,12 @@
     "moment": "^2.29.1",
     "pg": "^8.6.0",
     "postgres-migrations": "^5.1.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^27.0.4",
+    "superagent": "^6.1.0",
+    "supertest": "^6.1.3"
   }
 }

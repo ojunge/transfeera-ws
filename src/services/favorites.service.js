@@ -21,7 +21,6 @@ const util = require("../libraries/util");
 
  exports.findByNoFilter = async (size, skip) => {
   const count = await db.query('SELECT count(id) FROM vw_favorites');
-  console.log(count)
   const result = await db.query('SELECT * FROM vw_favorites');
   return util.paginate(count.rows[0].count,result.rows,skip,size);
 };
