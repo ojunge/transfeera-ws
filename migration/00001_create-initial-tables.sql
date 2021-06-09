@@ -34,7 +34,7 @@ CREATE TABLE favorites
 (
   id SERIAL,
   name varchar(255) not null,
-  nif varchar(14) not null,
+  nif varchar(14) not null, --Número de Identificação Fiscal
   email varchar(255) not null,
   agency varchar(4),
   agencyDigit varchar(1),
