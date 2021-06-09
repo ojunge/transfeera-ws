@@ -9,7 +9,7 @@ const util = require("../libraries/util");
       const field = util.isNif(search) ? 'nif' : util.isAgency(search) ? 'agency' : 'account';
     result = await this.findAllBySimpleField(field,search, size, skip);
   }else{
-    result = await this.findAllByFilterFilds(search);
+    result = await this.findAllByFilterFilds(search, size, skip);
   }
   return result;  
  };
@@ -27,25 +27,17 @@ const util = require("../libraries/util");
 
  exports.findAllBySimpleField = async (field, search, size, skip) => {
   const count = await db.query('SELECT count(id) FROM vw_favorites WHERE '+field+' = $1',[search]);
-  const result = await db.query(
-    'SELECT * FROM vw_favorites WHERE '+field+' = $1 offset $2 limit $3',
-    [search,skip, size],
-  );
+  const result = await db.query('SELECT * FROM vw_favorites WHERE '+field+' = $1 offset $2 limit $3',[search,skip, size]);
   return util.paginate(count.rows[0].count,result.rows,skip,size);
 };
 
 
- exports.findAllByFilterFilds = async (search) => {
-
+ exports.findAllByFilterFilds = async (search, size, skip) => {
   const likeParam = '%' + search + '%';
-  const result = await db.query(
-    " SELECT * FROM vw_favorites WHERE name like $1 union all "+
-    " SELECT * FROM vw_favorites WHERE nif like $1 union all "+
-    " SELECT * FROM vw_favorites WHERE agency like $1 union all "+
-    " SELECT * FROM vw_favorites WHERE account like $1",
-    [likeParam],
-  );
-  return result.rows;
+  const count = await db.query("SELECT count(id) FROM vw_favorites WHERE name like $1 OR nif like $1 OR agency like $1 OR account like $1 ",[likeParam]);
+  const result = await db.query("SELECT * FROM vw_favorites WHERE name like $1 OR nif like $1 OR agency like $1 OR account like $1 offset $2 limit $3 ",[likeParam, skip, size]);
+
+  return util.paginate(count.rows[0].count,result.rows,skip,size);
 };
 
  exports.create = async (favorite) => {
