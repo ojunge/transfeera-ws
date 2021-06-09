@@ -68,7 +68,7 @@ exports.update = async (req, res) => {
        return;
      }    
      service.update(payload);
-     
+
     res.status(200).send({ message: 'Favorite Updated Successfully!' });
 
   } catch (error) {

@@ -24,7 +24,7 @@ exports.migrate = async (req, res) => {
     })
     await postgresMigration.migrate(dbConfig, "migration")
    
-    res.status(201).send(results);
+    res.status(201).send({ message: 'Migrations criadas' });
 
   } catch (error) {
     res.status(500).send(error); 

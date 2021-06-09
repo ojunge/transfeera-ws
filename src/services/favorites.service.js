@@ -16,7 +16,7 @@ const util = require("../libraries/util");
 
  exports.findById = async (id) => {
     const result = await db.query('SELECT * FROM favorites WHERE id = $1',[id]);
-    return result.rows;
+    return result.rows.length>0? result.rows[0]:{};
   };
 
  exports.findByNoFilter = async (size, skip) => {
