@@ -13,7 +13,7 @@ exports.migrate = async (req, res) => {
     const dbConfig = {
       database: "transfeeraws",
       user: "postgres",
-      password: "pontocob",
+      password: "mypass",
       host: "localhost",
       port: 5432,
     }
