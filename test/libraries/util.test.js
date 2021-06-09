@@ -121,3 +121,71 @@ test('validate function validateEmail passing undefined', () => {
 });
 
 // Validate util.validateEmail end
+
+
+// Validate util.validateAccount start
+//   Getting data from https://www.4devs.com.br/gerador_conta_bancaria
+ // Banco do Brasil
+test('validate function validateAccount passing 258353,4,001 (Valid account Banco do brasil)', () => {
+    expect(util.validateAccount('258353','4','001')).toBe(true);
+});
+
+test('validate function validateAccount passing 100000000,9,001 (Invalid account Banco do Brasil)', () => {
+    expect(util.validateAccount('100000000','9', '001')).toBe(false);
+});
+
+ // Bradesco
+test('validate function validateAccount passing 1455969,8,237 (Valid account Bradesco)', () => {
+    expect(util.validateAccount('1455969','8','237')).toBe(true);
+});
+
+test('validate function validateAccount passing 100000000012,9,237 (Invalid account Bradesco)', () => {
+    expect(util.validateAccount('100000000012','9','237')).toBe(false);
+});
+
+ // Itau
+ test('validate function validateAccount passing 100000000,9,237 (Invalid account Itau)', () => {
+    expect(util.validateAccount('05716','1','341')).toBe(true);
+});
+
+test('validate function validateAccount passing 0,9,341 (Valid account Itau)', () => {
+    expect(util.validateAccount('0','9','341')).toBe(false);
+});
+
+
+// Validate util.validateAccount end
+
+
+// Validate util.validateAccount start
+
+//   Getting data from https://www.4devs.com.br/gerador_conta_bancaria
+
+ // Banco do Brasil
+ test('validate function validateAgency passing 233,7,001 (Valid account Banco do brasil)', () => {
+    expect(util.validateAgency('233','7','001')).toBe(true);
+});
+
+test('validate function validateAgency passing 00002,9,001 (Invalid account Banco do Brasil)', () => {
+    expect(util.validateAgency('10002','9', '001')).toBe(false);
+});
+
+ // Bradesco
+test('validate function validateAgency passing 047,0,237 (Valid account Bradesco)', () => {
+    expect(util.validateAgency('047','0','237')).toBe(true);
+});
+
+test('validate function validateAgency passing 11100,1,237 (Invalid account Bradesco)', () => {
+    expect(util.validateAgency('11100','1','237')).toBe(false);
+});
+
+ // Itau
+ test('validate function validateAgency passing 000,3,237 (Invalid account Itau)', () => {
+    expect(util.validateAgency('601','4','341')).toBe(true);
+});
+
+test('validate function validateAgency passing 211111,6,341 (Valid account Itau)', () => {
+    expect(util.validateAgency('211111','6','341')).toBe(false);
+});
+
+
+// Validate util.validateAccount end

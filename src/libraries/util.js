@@ -40,7 +40,37 @@ module.exports = {
   paginate: (total, list, index, size)=> {
     const pagination = { total: total, data: list, index:index, size: size}
     return pagination;
-  }, 
+  },
+  
+  validateAccount: (account, digit, codeBank)=> {
+    const ACCOUNT_BB =  /^(?:^0*)[1-9][0-9]{0,7}$/;
+    const ACCOUNT_DIGIT_BB =  /^[xX0-9]{0,1}$/;
+
+    const ACCOUNT_OTHER =  /^(?:^0*)[1-9][0-9]{0,10}$/;
+    const ACCOUNT_DIGIT_OTHER =  /^[0-9]{0,1}$/;
+    
+    if(codeBank === '001'){
+       return ((ACCOUNT_BB.test(account)) && (ACCOUNT_DIGIT_BB.test(digit)));
+    }else{
+       return ((ACCOUNT_OTHER.test(account)) && (ACCOUNT_DIGIT_OTHER.test(digit)));
+    }
+  },
+
+  validateAgency: (agency, digit, codeBank)=> {
+
+    const AGENCY_BB =  /^(?:^0*)[1-9][0-9]{0,3}$/;
+    const AGENCY_DIGIT_BB =  /^(?:^0*)[1-9][0-9]{0,3}$/;
+
+    const AGENCY_OTHER =  /^(?:^0*)[1-9][0-9]{0,3}$/;
+    const AGENCY_DIGIT_OTHER =  /^[xX0-9]{0,1}$/;
+
+    if(codeBank === '001'){
+        return ((AGENCY_BB.test(agency)) && (AGENCY_DIGIT_BB.test(digit)));
+    }else{
+      return ((AGENCY_OTHER.test(agency)) && (AGENCY_DIGIT_OTHER.test(digit)));
+    }
+  },
+
   validateEmail: (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());

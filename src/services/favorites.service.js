@@ -48,26 +48,38 @@ const util = require("../libraries/util");
   return result.rows;
 };
 
- exports.create = async (req, res) => {
-  const { product_name, quantity, price } = req.body;
-  const result = await db.query(
-    'INSERT INTO favorites (product_name, quantity, price) VALUES ($1, $2, $3)',
-    [product_name, quantity, price],
+ exports.create = async (favorite) => {
+  await db.query(
+    'INSERT INTO favorites (name, nif, email, agency, agencyDigit, account, accountDigit, bankCode, accountTypeCode, status, createdat, updatedat)'+ 
+    'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, current_date, current_date)',
+    [favorite.name, 
+      favorite.nif, 
+      favorite.email,
+      favorite.agency,
+      favorite.agencyDigit,
+      favorite.account,
+      favorite.accountDigit,
+      favorite.bankCode,
+      favorite.accountTypeCode,
+      favorite.status]
   );
-
-  res.status(201).send({
-    message: 'Favorite added successfully!',
-    body: {
-      product: { product_name, quantity, price },
-    },
-  });
+  
 };
 
-exports.update = async (req, res) => {
-  const favoriteId = parseInt(req.params.id);
-  const { product_name, quantity, price } = req.body;
+exports.update = async (favorite) => {
 
-  await db.query('UPDATE favorites SET product_name = $1, quantity = $2, price = $3 WHERE favoriteId = $4',[product_name, quantity, price, favoriteId]);
+  await db.query('UPDATE favorites SET name = $1, nif = $2, email = $3,  agency = $4,  agencyDigit = $5,  account = $6,  accountDigit = $7,  bankCode = $8,  accountTypeCode = $9, status = $10   WHERE id = $11', 
+  [favorite.name, 
+    favorite.nif, 
+    favorite.email,
+    favorite.agency,
+    favorite.agencyDigit,
+    favorite.account,
+    favorite.accountDigit,
+    favorite.bankCode,
+    favorite.accountTypeCode,
+    favorite.status,
+    favorite.id]);
   return true;
 };
 

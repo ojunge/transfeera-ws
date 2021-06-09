@@ -1,3 +1,5 @@
+const util = require('../libraries/util');
+const validator = require('../validator/validator');
 const service = require('../services/favorites.service');
 
  exports.findAll = async (req, res) => {
@@ -11,28 +13,7 @@ const service = require('../services/favorites.service');
  
  };
 
- exports.create = async (req, res) => {
-  try {
-    const { product_name, quantity, price } = req.body;
-    await db.query(
-      'INSERT INTO favorites (product_name, quantity, price) VALUES ($1, $2, $3)',
-      [product_name, quantity, price],
-    );
-  
-    res.status(201).send({
-      message: 'Favorite added successfully!',
-      body: {
-        product: { product_name, quantity, price },
-      },
-    });
-
-  }catch (error) {
-    res.status(500).send(error); 
-  }
-
-};
-
-exports.findById = async (req, res) => {
+ exports.findById = async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     const result = await service.findById(id);
@@ -44,17 +25,50 @@ exports.findById = async (req, res) => {
 
 };
 
+ exports.create = async (req, res) => {
+  try {
+     const payload = req.body;
+     const invalidFields = validator.validFavoriteForm(payload);
+  
+      if(invalidFields.length > 0){
+        res.status(500).send({
+          message: 'Favorite has invalid fields!',
+          fields:invalidFields,
+        });
+        return;
+      }    
+      
+    service.create(payload);
+    
+    res.status(201).send({
+      message: 'Favorite added successfully!',
+      body: {
+        data:payload,
+      },
+    });
+
+  }catch (error) {
+    res.status(500).send(error); 
+  }
+
+};
+
 exports.update = async (req, res) => {
 
   try {
     const favoriteId = parseInt(req.params.id);
-    const { product_name, quantity, price } = req.body;
-
-    const response = await db.query(
-      'UPDATE favorites SET product_name = $1, quantity = $2, price = $3 WHERE favoriteId = $4',
-      [product_name, quantity, price, favoriteId],
-    );
-  
+    const payload = req.body;
+    const invalidFields = validator.validFavoriteForm(payload);
+ 
+     if(invalidFields.length > 0){
+       res.status(500).send({
+         message: 'Favorite has invalid fields!',
+         fields:invalidFields,
+       });
+       return;
+     }    
+     service.update(payload);
+     
     res.status(200).send({ message: 'Favorite Updated Successfully!' });
 
   } catch (error) {
@@ -67,8 +81,14 @@ exports.updateEmail = async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     const { email} = req.body;
+    
+    if (!util.validateEmail(email)){
+      res.status(500).send({ message: 'This is not a valid email!' });
+      return;
+    } 
+
     service.updateEmail(id,email);
-    res.status(200).send({ message: 'Favorite Updated Successfully!' });
+    res.status(200).send({ message: 'Email changed Successfully!' });
 
   } catch (error) {
     res.status(500).send(error); 
