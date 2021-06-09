@@ -1,20 +1,15 @@
 const db = require('../config/database');
-const util = require("../libraries/util");
-const csv = require('csv-parser');
-const fs = require('fs');
 const postgresMigration = require('postgres-migrations');
 
 exports.migrate = async (req, res) => {
  
   try {
-   
-    const results = [];
-
+  
     const dbConfig = {
-      database: "transfeeraws",
-      user: "postgres",
-      password: "mypass",
-      host: "localhost",
+      database: process.env.TRANFEERA_WS_DATABASE,
+      user: process.env.TRANFEERA_WS_USER,
+      password: process.env.TRANFEERA_WS_PASS,
+      host: process.env.TRANFEERA_WS_HOST,
       port: 5432,
     }
   
