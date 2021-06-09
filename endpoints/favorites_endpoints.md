@@ -5,8 +5,13 @@ FAVORITES
 # GET REQUESTS
 
 #### findAll
-
+ 
+  http://localhost:2164/favorites?skip=1&size=10
+  http://localhost:2164/favorites?skip=0&size=10
 - http://localhost:2164/favorites?search=Dean
+  http://localhost:2164/favorites?search=72385156016&skip=0&size=10
+  http://localhost:2164/favorites?search=72385156016
+
 ```shell script
 curl -X GET http://localhost:2164/favorites?search=Dean
 ```
@@ -34,7 +39,6 @@ Example:
    }
 ]
 ```
-
 
 #### findById
 

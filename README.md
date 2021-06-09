@@ -22,11 +22,11 @@ O projeto será executado por padrão na porta 2164
 
 adicionar as variaveis de ambiente
 
-TRANFEERA_WS_HOST = localhost
-TRANFEERA_WS_DATABASE = transfeeraws
-TRANFEERA_WS_USER = TRANFEERA_WS_PASS
-TRANFEERA_WS_PORT = 5432
-TRANFEERA_WS_PASS = mypass
+- TRANFEERA_WS_HOST = localhost
+- TRANFEERA_WS_DATABASE = transfeeraws
+- TRANFEERA_WS_USER = postgres
+- TRANFEERA_WS_PORT = 5432
+- TRANFEERA_WS_PASS = mypass
 
 ## Endpoints Documentação
 

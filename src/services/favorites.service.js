@@ -7,7 +7,7 @@ const util = require("../libraries/util");
     result = await this.findByNoFilter(size, skip);
   }else if(util.isNif(search) || util.isAgency(search) || util.isAccount(search)){
       const field = util.isNif(search) ? 'nif' : util.isAgency(search) ? 'agency' : 'account';
-    result = await this.findAllBySimpleField(field,search);
+    result = await this.findAllBySimpleField(field,search, size, skip);
   }else{
     result = await this.findAllByFilterFilds(search);
   }
@@ -21,17 +21,17 @@ const util = require("../libraries/util");
 
  exports.findByNoFilter = async (size, skip) => {
   const count = await db.query('SELECT count(id) FROM vw_favorites');
-  const result = await db.query('SELECT * FROM vw_favorites');
+  const result = await db.query('SELECT * FROM vw_favorites offset $1 limit $2',[skip, size]);
   return util.paginate(count.rows[0].count,result.rows,skip,size);
 };
 
- exports.findAllBySimpleField = async (field, search) => {
-
+ exports.findAllBySimpleField = async (field, search, size, skip) => {
+  const count = await db.query('SELECT count(id) FROM vw_favorites WHERE '+field+' = $1',[search]);
   const result = await db.query(
-    'SELECT * FROM vw_favorites WHERE '+field+' = $1',
-    [search],
+    'SELECT * FROM vw_favorites WHERE '+field+' = $1 offset $2 limit $3',
+    [search,skip, size],
   );
-  return result.rows;
+  return util.paginate(count.rows[0].count,result.rows,skip,size);
 };
 
 

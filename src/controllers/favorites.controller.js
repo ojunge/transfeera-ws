@@ -5,7 +5,9 @@ const service = require('../services/favorites.service');
  exports.findAll = async (req, res) => {
    try {
       const search = req.query.search;
-      const result = await service.findAll(search);
+      const skip = req.query.skip;
+      const size = req.query.size;
+      const result = await service.findAll(search, size,skip);
       res.status(200).send(result); 
    } catch (error) {
       res.status(500).send(error); 
