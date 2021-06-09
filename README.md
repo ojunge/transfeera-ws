@@ -28,6 +28,11 @@ adicionar as variaveis de ambiente
 - TRANFEERA_WS_PORT = 5432
 - TRANFEERA_WS_PASS = mypass
 
+# Migration
+Para rodar as migrations acesse
+
+http://localhost:2164/migration
+
 ## Endpoints Documentação
 
  Favorites | [Here](endpoints/favorites_endpoints.md)
