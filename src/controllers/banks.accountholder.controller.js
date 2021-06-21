@@ -1,6 +1,5 @@
 const util = require('../libraries/util');
-const validator = require('../validator/validator');
-const service = require('../services/favorites.service');
+const service = require('../services/banks.accountholder.service');
 
  exports.findAll = async (req, res) => {
    try {
@@ -30,17 +29,8 @@ const service = require('../services/favorites.service');
  exports.create = async (req, res) => {
   try {
      const payload = req.body;
-     const invalidFields = validator.validFavoriteForm(payload);
-  
-      if(invalidFields.length > 0){
-        res.status(500).send({
-          message: 'Favorite has invalid fields!',
-          fields:invalidFields,
-        });
-        return;
-      }    
-      
-    service.create(payload);
+
+    service.create(obj);
     
     res.status(201).send({
       message: 'Favorite added successfully!',
@@ -60,15 +50,6 @@ exports.update = async (req, res) => {
   try {
     const favoriteId = parseInt(req.params.id);
     const payload = req.body;
-    const invalidFields = validator.validFavoriteForm(payload);
- 
-     if(invalidFields.length > 0){
-       res.status(500).send({
-         message: 'Favorite has invalid fields!',
-         fields:invalidFields,
-       });
-       return;
-     }    
      service.update(payload);
 
     res.status(200).send({ message: 'Favorite Updated Successfully!' });
