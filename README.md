@@ -18,28 +18,34 @@ npm run test
 
 Banco de dados utilizado foi o postgres.
 
-O projeto será executado por padrão na porta 2164
 
-adicionar as variaveis de ambiente
+# db:create
 
-- TRANFEERA_WS_HOST = localhost
-- TRANFEERA_WS_DATABASE = transfeeraws
-- TRANFEERA_WS_USER = postgres
-- TRANFEERA_WS_PORT = 5432
-- TRANFEERA_WS_PASS = mypass
+```bash
+npx sequelize-cli db:create
+```
 
-# Migration
-Para rodar as migrations acesse
+# db create migration
 
-http://localhost:2164/migration
+```bash
+npx sequelize-cli migration:generate --name demo-user
+```
 
-## Endpoints Documentação
+# db:migrate
 
- Favorites | [Here](endpoints/favorites_endpoints.md)
+```bash
+npx sequelize-cli db:migrate
+```
 
- Banks | [Here](endpoints/banks_endpoints.md)
+# create seed
 
- Accounts Type | [Here](endpoints/accountsType_endpoints.md)
+```bash
+npx sequelize-cli seed:generate --name create-projects
+```
 
- Migration | [Here](endpoints/migration_endpoints.md)
+# run seed
 
+```bash
+npx sequelize-cli db:seed:all
+npx sequelize-cli db:seed:undo
+```

@@ -3,10 +3,10 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
    
-    return queryInterface.bulkInsert('AccountType', [
-      {code: 'CC',name: 'CONTA_CORRENTE'},
-      {code: 'CP',name: 'CONTA_POUPANCA'},
-      {code: 'CF',name: 'CONTA_FACIL'}
+    return queryInterface.bulkInsert('accounts_type', [
+      {code: 'CC',name: 'CONTA_CORRENTE', createdAt: new Date(),updatedAt: new Date()},
+      {code: 'CP',name: 'CONTA_POUPANCA', createdAt: new Date(),updatedAt: new Date()},
+      {code: 'CF',name: 'CONTA_FACIL', createdAt: new Date(),updatedAt: new Date()}
     
     ], {});
 
@@ -14,7 +14,7 @@ module.exports = {
 
 down: (queryInterface, Sequelize) => {
   
-    return queryInterface.bulkDelete('AccountType', null, {});
+    return queryInterface.bulkDelete('accounts_type', null, {});
 }
 };
 

@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false
     },
-    agencydigit: {
+    agencyDigit: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -40,11 +40,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false
     },
-    accountdigit: {
+    accountDigit: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    accounttypecode: {
+    accountTypeCode: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -52,19 +52,19 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false
     },
-    createdat: {
-        type: 'TIMESTAMP',
+    createdAt: {
+        type: DataTypes.DATE,
         allowNull: false
-      },
-      updatedat: {
-        type: 'TIMESTAMP',
+    },
+    updatedAt: {
+        type: DataTypes.DATE,
         allowNull: false
-      }
+    }
   }, {
     sequelize,
     modelName: 'BankAccountHolder',
     timestamps: false,
-    tableName : 'favorites'
+    tableName : 'banks_account_holder'
   });
   return BankAccountHolder;
 };

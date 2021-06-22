@@ -24,14 +24,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false
     },
-    createdat: {
-        type: 'TIMESTAMP',
+    createdAt: {
+        type: DataTypes.DATE,
         allowNull: false
-      },
-      updatedat: {
-        type: 'TIMESTAMP',
+    },
+    updatedAt: {
+        type: DataTypes.DATE,
         allowNull: false
-      }
+    }
   }, {
     sequelize,
     modelName: 'Bank',
