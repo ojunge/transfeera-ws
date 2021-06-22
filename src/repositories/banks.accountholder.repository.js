@@ -31,8 +31,8 @@ if(search == undefined || search == ''|| search == null){
 
  exports.create = async (payload) => {
   
-  BankAccountHolder.create({ name: payload.name },
-    { name: payload.name },
+
+  const item =  BankAccountHolder.build({ name: payload.name },
     { nif: payload.nif },
     { email: payload.email },
     { agency: payload.agency },
@@ -42,7 +42,9 @@ if(search == undefined || search == ''|| search == null){
     { bankcode: payload.bankcode },
     { accounttypecode: payload.accounttypecode },
     { status: payload.status });
-    
+
+    console.log(item);
+    item.save();
   
 };
 

@@ -30,10 +30,10 @@ const service = require('../services/banks.accountholder.service');
   try {
      const payload = req.body;
 
-    service.create(obj);
+    service.create(payload);
     
     res.status(201).send({
-      message: 'Favorite added successfully!',
+      message: 'Bank Account Holder added successfully!',
       body: {
         data:payload,
       },
@@ -48,11 +48,11 @@ const service = require('../services/banks.accountholder.service');
 exports.update = async (req, res) => {
 
   try {
-    const favoriteId = parseInt(req.params.id);
+    const bankAccountHolderId = parseInt(req.params.id);
     const payload = req.body;
-     service.update(payload);
+     service.update(payload, bankAccountHolderId);
 
-    res.status(200).send({ message: 'Favorite Updated Successfully!' });
+    res.status(200).send({ message: 'Bank Account Holder Updated Successfully!' });
 
   } catch (error) {
     res.status(500).send(error); 
@@ -83,7 +83,7 @@ exports.delete = async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     await service.delete(id); 
-    res.status(200).send({ message: 'Favorite deleted successfully!', favoriteId });
+    res.status(200).send({ message: 'Bank Account Holder deleted successfully!', favoriteId });
   } catch (error) {
     res.status(500).send(error); 
   }
