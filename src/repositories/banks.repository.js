@@ -5,14 +5,13 @@ exports.findAll = async (search) => {
 
   if(search == undefined || search == ''|| search == null){
     return  Bank.findAll({
-      loggging: true,
+      loggging: false,
     });
   }
 
    const query  = '%' + search + '%';
-   console.log("chegou");
    return  Bank.findAll({
-    loggging: true,
+    loggging: false,
     where: {
       [Op.or]: 
       [ 

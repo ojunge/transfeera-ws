@@ -38,10 +38,14 @@ module.exports = {
             accountDigit: Joi.string()
                 .min(1)
                 .max(1)
-                .required(),    
+                .required(), 
             accountTypeCode: Joi.string()
                 .min(2)
                 .max(2)
+                .required(),       
+            bankCode: Joi.string()
+                .min(1)
+                .max(3)
                 .required(),
             status: Joi.string()
                 .min(1)
@@ -84,6 +88,10 @@ module.exports = {
             accountTypeCode: Joi.string()
                 .min(2)
                 .max(2)
+                .required(),
+            bankCode: Joi.string()
+                .min(1)
+                .max(3)
                 .required(),
             status: Joi.string()
                 .min(1)

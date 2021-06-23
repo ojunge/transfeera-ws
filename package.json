@@ -4,7 +4,7 @@
   "description": "web service para projeto da Transfeera",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose --coverage --forceExit --watchAll --maxWorkers=1",
     "db:create": "sequelize-cli db:create",
     "db:migrate": "sequelize-cli db:migrate",
     "db:g:migration": "sequelize-cli migration:generate --name",

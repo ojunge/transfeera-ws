@@ -1,18 +1,17 @@
 const  {BankAccountHolder}  = require('../models');
 const  {Op}  = require('sequelize');
-const util = require("../libraries/util");
 
 exports.findAll = async (search) => {
    
 if(search == undefined || search == ''|| search == null){
     return  BankAccountHolder.findAll({
-      loggging: true,
+      loggging: false,
     });
 }
   const query  = '%' + search + '%';
   return  BankAccountHolder.findAll({
    raw: true,
-   loggging: true,
+   loggging: false,
    where: {
      [Op.or]: 
      [ 
@@ -31,20 +30,20 @@ if(search == undefined || search == ''|| search == null){
 
  exports.create = async (payload) => {
   
-
-  const item =  BankAccountHolder.build({ name: payload.name },
-    { nif: payload.nif },
-    { email: payload.email },
-    { agency: payload.agency },
-    { agencydigit: payload.agencydigit },
-    { account: payload.account },
-    { accountdigit: payload.accountdigit },
-    { bankcode: payload.bankcode },
-    { accounttypecode: payload.accounttypecode },
-    { status: payload.status });
-
-    console.log(item);
-    item.save();
+  BankAccountHolder.create(
+    { name: payload.name ,
+     nif: payload.nif ,
+     email: payload.email ,
+     agency: payload.agency ,
+     agencyDigit: payload.agencyDigit ,
+     account: payload.account ,
+     accountDigit: payload.accountDigit,
+     bankCode: payload.bankCode ,
+     accountTypeCode: payload.accountTypeCode ,
+     status: payload.status,
+     createdAt: new Date(),
+     updatedAt: new Date() });
+    
   
 };
 
@@ -56,12 +55,13 @@ exports.update = async (payload,id) => {
   obj.nif = payload.nif;
   obj.email = payload.email;
   obj.agency = payload.agency;
-  obj.agencydigit = payload.agencydigit;
+  obj.agencyDigit = payload.agencyDigit;
   obj.account = payload.account;
-  obj.accountdigit = payload.accountdigit;
-  obj.bankcode = payload.bankcode;
-  obj.accounttypecode = payload.accounttypecode;
+  obj.accountDigit = payload.accountDigit;
+  obj.bankCode = payload.bankCode;
+  obj.accountTypeCode = payload.accountTypeCode;
   obj.status = payload.status;
+  obj.updatedAt = new Date();
   obj.save();
 
 };

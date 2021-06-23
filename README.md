@@ -1,13 +1,45 @@
 # transfeera-ws
 
-## Instruções
+## instalando as dependências
+
+NodeJs 14.17.1
+
+```bash
+cd transfeera-ws/
+npm install
+```
+## instalando yarn globalmente na maquina
+
+```bash
+npm install --global yarn
+```
+
+## Instruções Banco de Dados 
 
 Para rodar o projeto siga o comando abaixo:
 
 ```bash
 cd transfeera-ws/
-node src\index.js
 ```
+Banco de dados utilizado foi o postgres, alterar as configurações em config.json.
+
+### db:create
+
+```bash
+npx sequelize-cli db:create
+```
+### db:migrate
+
+```bash
+npx sequelize-cli db:migrate
+```
+### run seed
+
+```bash
+npx sequelize-cli db:seed:all
+```
+
+## Instruções Testes 
 
 para executar os tests
 
@@ -16,36 +48,9 @@ cd transfeera-ws/
 npm run test
 ```
 
-Banco de dados utilizado foi o postgres.
-
-
-# db:create
+## Iniciando a aplicação.
 
 ```bash
-npx sequelize-cli db:create
-```
-
-# db create migration
-
-```bash
-npx sequelize-cli migration:generate --name demo-user
-```
-
-# db:migrate
-
-```bash
-npx sequelize-cli db:migrate
-```
-
-# create seed
-
-```bash
-npx sequelize-cli seed:generate --name create-projects
-```
-
-# run seed
-
-```bash
-npx sequelize-cli db:seed:all
-npx sequelize-cli db:seed:undo
+cd transfeera-ws/
+yarn start
 ```

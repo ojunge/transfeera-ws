@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   BankAccountHolder.init({
     id: {
         type: DataTypes.INTEGER,
-        autoIncrement: false,
+        autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
@@ -47,6 +47,10 @@ module.exports = (sequelize, DataTypes) => {
     accountTypeCode: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    bankCode: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     status: {
         type: DataTypes.STRING,

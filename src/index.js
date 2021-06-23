@@ -23,7 +23,7 @@ app.use('/banks-account-holder/', banksAccountHolderRoute);
 module.exports = app;
 
 if (process.env.NODE_ENV !== 'test') {
-    app.listen(2164);
+    app.listen(3000);
 }
 
 

@@ -12,7 +12,7 @@
       
     const result = schemas.create().validate(req.body); 
     if (result.error != null) { 
-      res.status(422).json({ message: 'Invalid request', data: req.body }); 
+      res.status(422).json({ message: 'Invalid request', data: req.body, errors: result.error}); 
     } else { 
       banksAccountHolderController.create(req, res); 
     } 
@@ -23,13 +23,13 @@
       
     const result = schemas.update().validate(req.body); 
     if (result.error != null) { 
-        res.status(422).json({ message: 'Invalid request', data: req.body }); 
+       res.status(422).json({ message: 'Invalid request', data: req.body, errors: result.error}); 
     } else { 
       banksAccountHolderController.update(req, res); 
     } 
   });
  
- router.put('updateEmail/:id', async (req, res) => { 
+ router.put('update-email/:id', async (req, res) => { 
      
     const result = schema.updateEmail().validate(req.body); 
     if (result.error != null) { 
